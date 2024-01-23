@@ -1,0 +1,36 @@
+[package]
+bucket = "dependencies"
+name = "FbxParser"
+version = "1.0.0"
+platform = "win64"
+stage = "stable"
+
+[project]
+edition = "2023"
+repository = ""
+documentation = ""
+authors = []
+license = "LICENSE"
+readme = "README.md"
+description = ""
+
+[dependencies]
+#example1 = "*"
+
+[target.'cfg(platform="win64", stage = "rc")'.dependencies]
+#example2 = "5.0.1"
+
+[publish]
+clean = ["build"]
+#output = "D:/git/converters/fbx_parser/../3rdParty/FbxParser"
+third_party = "D:/git/converters/fbx_parser/../3rdParty"
+builds = [
+    { type = "cmake", enable = true, name = "windows-release-pdb", install = false, platform = "win", output = "D:/git/converters/fbx_parser/../3rdParty/FbxParser" },
+    { type = "cmake", enable = true, name = "linux-release-pdb", install = false, platform = "linux", output = "D:/git/converters/fbx_parser/../3rdParty/FbxParser" },
+]
+exclude = ["*.pdb", "*.lib", "*.a"]
+
+[deploy]
+destination = { root = "${CONVERTER_HOME}", subfolder = "FbxParser" }
+actions = []
+environments = []

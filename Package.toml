@@ -1,0 +1,36 @@
+[package]
+bucket = "@PROJECT_TYPE@"
+name = "@PROJECT_NAME@"
+version = "@PROJECT_VERSION@"
+platform = "@PROJECT_PLATFORM@"
+stage = "@PROJECT_STAGE@"
+
+[project]
+edition = "2023"
+repository = ""
+documentation = ""
+authors = []
+license = "LICENSE"
+readme = "README.md"
+description = ""
+
+[dependencies]
+#example1 = "*"
+
+[target.'cfg(platform="win64", stage = "rc")'.dependencies]
+#example2 = "5.0.1"
+
+[publish]
+clean = ["build"]
+#output = "@PROJECT_OUTPUT_PATH@"
+third_party = "@THIRD_PARTY@"
+builds = [
+    { type = "cmake", enable = true, name = "windows-release-pdb", install = false, platform = "win", output = "@PROJECT_OUTPUT_PATH@" },
+    { type = "cmake", enable = true, name = "linux-release-pdb", install = false, platform = "linux", output = "@PROJECT_OUTPUT_PATH@" },
+]
+exclude = ["*.pdb", "*.lib", "*.a"]
+
+[deploy]
+destination = { root = "${CONVERTER_HOME}", subfolder = "@PROJECT_NAME@" }
+actions = []
+environments = []
